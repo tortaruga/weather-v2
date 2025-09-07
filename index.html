@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+    <link rel="stylesheet" href="./src/output.css"> 
+</head>
+<body>
+    <section class="settings">
+        <select name="units" id="units">
+            <option value="">Unit</option>
+            <option value="f">Farenheit</option>
+            <option value="c">Celsius</option>
+        </select>
+    </section>
+
+    <h1>How's the weather today?</h1>
+    
+    <form class="weather-form">
+        <label for="city-input">
+            <input type="text" placeholder="Search for a place..." name="city-input" id="city-input">
+        </label>
+        <button id="search-btn">Search</button>
+    </form>
+
+    <section class="container">
+        <section class="forecast">
+            <h2>berlin, germany</h2>
+            <h3>date</h3>
+            <p>20 C</p>
+        </section>
+
+        <section class="details">
+            <div class="feels-like"></div>
+            <div class="precipitations"></div>
+            <div class="wind"></div>
+            <div class="humidity"></div>
+        </section>
+
+        <section class="astro">
+            <div class="sunrise">sunrise</div>
+            <div class="sunset">sunset</div>
+            <div class="moonrise">moonrise</div>
+            <div class="moonset">moonset</div>
+            <div class="moon-phase">moon phase</div>
+            <div class="illumination">illumination</div>
+        </section>
+    </section>
+
+    <script src="./app.js"></script>
+</body>
+</html>
