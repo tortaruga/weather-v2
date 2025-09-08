@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+body {
+    background-color: white;
+    color: black;
+}
+
+body.dark {
+    background-color: #212121;
+    color: whitesmoke;
+}    
+
+.forecast {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
