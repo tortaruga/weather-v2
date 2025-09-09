@@ -2,6 +2,7 @@ const weatherForm = document.querySelector('.weather-form');
 const cityInput = document.querySelector('#city-input');
 const locationElement = document.querySelector('.location');
 const dateElement = document.querySelector('.date');
+const timeElement = document.querySelector('.local-time'); 
 const tempElement = document.querySelector('.temp');
 const conditionElement = document.querySelector('.condition');
 const feelsLikeElement = document.querySelector('.feels-like');
@@ -16,6 +17,8 @@ const moonPhaseElement = document.querySelector('.moon-phase');
 const illuminationElement = document.querySelector('.illumination');
 const unitsMenu = document.querySelector('#units');
 const forecastElement = document.querySelector('.forecast');
+
+const phaseIconElement = document.querySelector('.phase-icon');
 
 let isDay = true;
 
@@ -47,6 +50,7 @@ function fetchData() {
         tempElement.textContent = handleUnit(data.current[`temp_${unit}`]);  
          
         dateElement.textContent = getFormattedDate(data.location.localtime); 
+        timeElement.textContent = `${new Date(data.location.localtime).getHours()}:${new Date(data.location.localtime).getMinutes()}`;  
         // conditionElement.textContent = data.forecast.forecastday[0].day.condition.text; 
         conditionElement.textContent = data.current.condition.text; 
 
@@ -60,6 +64,7 @@ function fetchData() {
         moonriseElement.textContent = data.forecast.forecastday[0].astro.moonrise; 
         moonsetElement.textContent = data.forecast.forecastday[0].astro.moonset; 
         moonPhaseElement.textContent = data.forecast.forecastday[0].astro.moon_phase; 
+        displayMoonPhaseIcon(data.forecast.forecastday[0].astro.moon_phase);
         illuminationElement.textContent = data.forecast.forecastday[0].astro.moon_illumination;  
     }); 
 } 
@@ -77,14 +82,6 @@ function getFormattedDate(date) {
     const dateObj = new Date(date);
     return dateObj.toLocaleDateString(undefined, options);
 }   
-
-const date = new Date('2025-09-08 00:04');
-// console.log(date.toLocaleDateString(undefined, {
-//       weekday: "long", 
-//       year: "numeric", 
-//       month: "short",
-//       day: "numeric",
-//     }));   
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -159,5 +156,11 @@ function handleImage(conditionCode, isDay) {
 }
 
 function displayImg() {
-    forecastElement.style.backgroundImage = img;
+    forecastElement.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), ${img}`;   
+} 
+
+function displayMoonPhaseIcon(phase) {
+    const normalizedPhase = phase.toLowerCase().replace(' ', '-');
+    phaseIconElement.src = `./images/icons/${normalizedPhase}.svg`;
 }
+ 

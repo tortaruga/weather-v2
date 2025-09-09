@@ -3,50 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>weather app</title>
+    <title>weather app</title> 
     <link rel="stylesheet" href="./src/output.css"> 
-</head>
-<body>
-    <section class="settings">
-        <select name="units" id="units">
-            <option value="">Unit</option>
-            <option value="f">Farenheit</option>
-            <option value="c">Celsius</option>
+</head> 
+<body class="bg-blue-950 text-white p-4"> 
+    <section class="settings flex justify-end"> 
+        <select name="units" id="units" class="text-center rounded-md bg-gray-600 text-white p-2 cursor-pointer">
+            <option value="" class="units-menu after:bg-[url('./images/icons/settings.svg')]">Units</option>
+            <option value="f">Imperial</option> 
+            <option value="c">Metric</option>
         </select>
     </section>
 
-    <h1>How's the weather today?</h1>
-    
-    <form class="weather-form">
-        <label for="city-input">
-            <input type="text" placeholder="Search for a place..." name="city-input" id="city-input">
+    <h1 class="text-center text-6xl my-6 font-semibold">How's the weather today?</h1>
+      
+    <form class="weather-form max-w-xl mx-auto sm:flex-row flex flex-col gap-2 mt-15 mb-8"> 
+        <label for="city-input" class="sm:grow focus-within:outline focus-within:outline-amber-400 focus-visible:outline focus-visible:outline-amber-400 p-2.5 flex gap-4 items-center rounded-md bg-white/20">  
+            <img class="w-5 " src="./images/icons/search.svg" alt="magnifying glass">
+            <input type="text" class="focus-visible:outline-none grow" placeholder="Search for a place..." name="city-input" id="city-input">
         </label>
-        <button id="search-btn">Search</button>
-    </form>
+        <button class="rounded-md bg-blue-400 p-2.5" id="search-btn">Search</button>
+    </form> 
 
-    <section class="container">
-        <section class="forecast">
-            <h2 class="location">berlin, germany</h2>
-            <h3 class="date">date</h3>
-            <p class="temp">20 C</p>
-            <p class="condition"></p>
-        </section>
+    <section class="container max-w-7xl mx-auto  md:grid md:items-stretch grid-rows-1 gap-6 md:grid-cols-3">
+        <div class="col col-span-2 flex flex-col justify-stretch ">  
+          <section class="forecast bg-center bg-cover bg-no-repeat grow md:flex justify-between items-center bg-blue-300 text-center p-8 rounded-xl"> 
+            <div class="coordinates md:text-left ">
+              <h2 class="location capitalize text-3xl font-bold mb-3">berlin, germany</h2>
+              <h3 class="date capitalize text-gray-300 text-2xl">date</h3>
+              <p class="local-time">time</p> 
+            </div>
 
-        <section class="details">
-            <div class="feels-like"></div>
-            <div class="precipitations"></div>
-            <div class="wind"></div>
-            <div class="humidity"></div>
-        </section>
+            <div class="meteo"> 
+              <p class="temp mt-6 mb-3 justify-self-end text-6xl font-bold italic">20 C</p>
+              <p class="condition justify-self-end"></p>
+            </div>
+          </section>
 
-        <section class="astro">
-            <div class="sunrise">sunrise</div>
-            <div class="sunset">sunset</div>
-            <div class="moonrise">moonrise</div>
-            <div class="moonset">moonset</div>
-            <div class="moon-phase">moon phase</div>
-            <div class="illumination">illumination</div>
-        </section>
+          <section class="details flex flex-wrap gap-4 my-4 ">
+            <div class="bg-white/10 border rounded-md p-6 w-[calc(50%-0.5rem)]">  
+                <p>Feels like</p> 
+                <p class="feels-like text-3xl"></p>    
+            </div>
+            <div class="bg-white/10 border rounded-md p-6 w-[calc(50%-0.5rem)]">
+                <p>Precipitations</p>
+                <p class="precipitations text-3xl"></p>
+            </div>
+            <div class="bg-white/10 border rounded-md p-6 w-[calc(50%-0.5rem)]">
+                <p>Wind</p>
+                <p class="wind text-3xl"></p>
+            </div>
+            <div class="bg-white/10 border rounded-md p-6 w-[calc(50%-0.5rem)]">
+                <p>Humidity</p>
+                <p class="humidity text-3xl"></p>
+            </div> 
+          </section>
+        </div>
+
+        <section class="astro bg-blue-600/10 rounded-xl p-4 flex flex-col gap-4">
+            <div class="border p-4 rounded-md bg-white/10 flex gap-3 items-center"> 
+                <img src="./images/icons/sunrise.svg" alt="sunrise icon" class="w-10">
+                <p>Sunrise</p>
+                <p class="sunrise ml-auto"></p> 
+            </div>
+            <div class="border p-4 rounded-md bg-white/10 flex gap-3 items-center"> 
+                <img src="./images/icons/sunset.svg" alt="sunset icon" class="w-10">
+                <p>Sunset</p>
+                <p class="sunset ml-auto"></p>
+            </div>
+            <div class="border p-4 rounded-md bg-white/10 flex gap-3 items-center">
+                <img src="./images/icons/moonrise.svg" alt="moonrise icon" class="w-10">
+                <p>Moonrise</p> 
+                <div class="moonrise ml-auto"></div>
+            </div>
+            <div class="border p-4 rounded-md bg-white/10 flex gap-3 items-center">
+                <img src="./images/icons/moonset.svg" alt="moonset icon" class="w-10">
+                <p>Moonset</p>
+                <div class="moonset ml-auto"></div>
+            </div>
+            <div class="border p-4 rounded-md bg-white/10 flex gap-3 items-center">
+                <img src="" alt="moon phase icon" class="phase-icon w-10">
+                <p>Moon phase</p>
+                <div class="moon-phase ml-auto"></div>
+            </div>
+            <div class="border p-4 rounded-md bg-white/10 flex gap-3 items-center">
+                <p>Moon illumination</p>
+                <div class="illumination ml-auto"></div>
+            </div>
+        </section> 
     </section>
 
     <script src="./app.js"></script>
