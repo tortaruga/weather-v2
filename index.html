@@ -27,7 +27,9 @@
 
     <section class="container max-w-7xl mx-auto  md:grid md:items-stretch grid-rows-1 gap-6 md:grid-cols-3">
         <div class="col col-span-2 flex flex-col justify-stretch ">  
-          <section class="forecast bg-center bg-cover bg-no-repeat grow md:flex justify-between items-center bg-blue-300 text-center p-8 rounded-xl"> 
+          <section class="forecast bg-center bg-cover bg-no-repeat grow bg-blue-300 text-center p-8 rounded-xl"> 
+            
+            <div class="md:flex justify-between items-center mb-6 ">
             <div class="coordinates md:text-left ">
               <h2 class="location capitalize text-3xl font-bold mb-3">berlin, germany</h2>
               <h3 class="date capitalize text-gray-300 text-2xl">date</h3>
@@ -38,6 +40,10 @@
               <p class="temp mt-6 mb-3 justify-self-end text-6xl font-bold italic">20 C</p>
               <p class="condition justify-self-end"></p>
             </div>
+            </div>
+
+            <p class="text-left">🌧️ daily chance of rain: <span class="chance-rain"></span></p>
+            <p class="text-left">🌨️ daily chance of snow: <span class="chance-snow"></span></p>
           </section>
 
           <section class="details flex flex-wrap gap-4 my-4 ">
@@ -91,6 +97,11 @@
                 <div class="illumination ml-auto"></div>
             </div>
         </section> 
+    </section>
+
+    <section class="hourly max-w-7xl mx-auto mt-8"> 
+        <h3>hourly forecast</h3>
+        <div class="container justify-around bg-blue-900 p-4 rounded-md flex overflow-y-auto gap-4 mb-8 mt-4 pb-4 text-center"></div>
     </section>
 
     <script src="./app.js"></script>

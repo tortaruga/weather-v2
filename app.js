@@ -19,6 +19,10 @@ const unitsMenu = document.querySelector('#units');
 const forecastElement = document.querySelector('.forecast');
 
 const phaseIconElement = document.querySelector('.phase-icon');
+const chanceRainElement = document.querySelector('.chance-rain');
+const chanceSnowElement = document.querySelector('.chance-snow'); 
+
+const hourlyForecastContainer = document.querySelector('.hourly .container');
 
 let isDay = true;
 
@@ -41,7 +45,7 @@ function handleUnit(temp) {
 function fetchData() {
     fetch(`/.netlify/functions/fetchWeather?city=${encodeURIComponent(city)}`)
     .then(response => response.json())
-    .then(data => {
+    .then(data => { 
  
         handleImage(data.current.condition.code, data.current['is_day']); 
     
@@ -50,14 +54,17 @@ function fetchData() {
         tempElement.textContent = handleUnit(data.current[`temp_${unit}`]);  
          
         dateElement.textContent = getFormattedDate(data.location.localtime); 
-        timeElement.textContent = `${new Date(data.location.localtime).getHours()}:${new Date(data.location.localtime).getMinutes()}`;  
+        timeElement.textContent = getFormattedTime(data.location.localtime); 
         // conditionElement.textContent = data.forecast.forecastday[0].day.condition.text; 
         conditionElement.textContent = data.current.condition.text; 
+
+        chanceRainElement.textContent = data.forecast.forecastday[0].day["daily_chance_of_rain"] + '%';
+        chanceSnowElement.textContent = data.forecast.forecastday[0].day["daily_chance_of_snow"] + '%';
 
         feelsLikeElement.textContent = handleUnit(data.current[`feelslike_${unit}`]); 
         precipitationsElement.textContent = data.current.precip_mm; 
         windElement.textContent = data.current.wind_kph;
-        humidityElement.textContent = data.current.humidity;
+        humidityElement.textContent = data.current.humidity + '%';
 
         sunriseElement.textContent = data.forecast.forecastday[0].astro.sunrise; 
         sunsetElement.textContent = data.forecast.forecastday[0].astro.sunset; 
@@ -65,10 +72,38 @@ function fetchData() {
         moonsetElement.textContent = data.forecast.forecastday[0].astro.moonset; 
         moonPhaseElement.textContent = data.forecast.forecastday[0].astro.moon_phase; 
         displayMoonPhaseIcon(data.forecast.forecastday[0].astro.moon_phase);
-        illuminationElement.textContent = data.forecast.forecastday[0].astro.moon_illumination;  
+        illuminationElement.textContent = data.forecast.forecastday[0].astro.moon_illumination + '%';  
+
+        // "2025-09-09 00:00" 
+        const hourNow = new Date().getHours();
+        createDailyHourElements(data.forecast.forecastday[0].hour)
+        // from hourNow to 23
+        // from now to 23 create n divs displaying hour, icon, temp
     }); 
 } 
  
+function createDailyHourElements(data) {
+    hourlyForecastContainer.innerHTML = '';
+    const hourNow = new Date().getHours();
+    
+    for (let i = hourNow; i < 24; i++) {
+        const div = document.createElement('div');
+        div.classList.add("border", "rounded-md", "bg-black", "p-4");   
+        hourlyForecastContainer.appendChild(div);
+
+        const hour = document.createElement('p');
+        hour.textContent = getFormattedTime(data[i].time);
+        div.appendChild(hour); 
+        const icon = document.createElement('img');
+        icon.src = data[i].condition.icon; 
+        div.appendChild(icon);  
+        const temp = document.createElement('p');
+        temp.textContent =  handleUnit(data[i][`temp_${unit}`]);   
+        div.appendChild(temp);
+    }
+
+}
+
 fetchData();
 
 function getFormattedDate(date) {
@@ -80,8 +115,19 @@ function getFormattedDate(date) {
     };
 
     const dateObj = new Date(date);
-    return dateObj.toLocaleDateString(undefined, options);
+    return dateObj.toLocaleDateString([], options);
 }   
+
+function getFormattedTime(date) {
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    };
+
+    const dateObj = new Date(date);
+    return dateObj.toLocaleTimeString([], options);
+}
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -164,3 +210,4 @@ function displayMoonPhaseIcon(phase) {
     phaseIconElement.src = `./images/icons/${normalizedPhase}.svg`;
 }
  
+
