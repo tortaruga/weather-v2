@@ -10,12 +10,19 @@
     <link rel="stylesheet" href="./src/output.css">
 </head>   
 <body class="p-4 bg-sky-50 font-montserrat text-sky-700 dark:bg-sky-950 dark:text-sky-100"> 
-    <section class="settings flex justify-end">  
-        <select name="units" id="units" class="text-center rounded-md bg-blue-950 dark:bg-sky-100 text-white dark:text-blue-950 p-2 cursor-pointer">
-            <option value="" class="units-menu">⚙️ Units</option> 
-            <option value="imperial">Imperial</option> 
-            <option value="metric">Metric</option>
-        </select> 
+    <section class="settings flex justify-end">   
+        <div class="units relative">
+        <div class="units-dropdown text-center rounded-md flex gap-3 bg-blue-950 dark:bg-sky-100 text-white dark:text-blue-950 p-2 cursor-pointer">
+            <img id="settings-icon" src="./images/icons/settings-light.svg" class="w-5" alt="settings icon">
+            <span class="text-sky-100 dark:text-sky-800">Units</span>
+            <button aria-label="open units dropdown menu"  class="w-5 cursor-pointer"><img id="arrow-icon" src="./images/icons/arrow-down.svg" alt="arrow down icon"></button>
+        </div>
+  
+        <div class="options left-0 absolute w-[100%] max-h-0 duration-700 bg-sky-200 dark:bg-sky-800 rounded-b-md overflow-hidden "> 
+            <p id="metric" class="hover:bg-gray-200 dark:hover:bg-sky-900 p-2 cursor-pointer">Metric</p> 
+            <p id="imperial" class="hover:bg-gray-200 dark:hover:bg-sky-900 p-2 cursor-pointer">Imperial</p> 
+        </div>
+        </div>
     </section>
 
     <h1 class="text-center text-6xl my-6 font-semibold">How's the weather today?</h1>

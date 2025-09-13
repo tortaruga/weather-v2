@@ -3,5 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-montserrat: 'Montserrat', sans;
+    --font-montserrat: 'Montserrat', sans; 
 }
+
+.show {
+    max-height: 500px;
+} 

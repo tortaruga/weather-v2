@@ -15,8 +15,8 @@ const moonriseElement = document.querySelector('.moonrise');
 const moonsetElement = document.querySelector('.moonset');
 const moonPhaseElement = document.querySelector('.moon-phase');
 const illuminationElement = document.querySelector('.illumination');
-const unitsMenu = document.querySelector('#units');
 const forecastElement = document.querySelector('.forecast');
+const dropDownMenu = document.querySelector('.units-dropdown');
 
 const phaseIconElement = document.querySelector('.phase-icon');
 const chanceRainElement = document.querySelector('.chance-rain');
@@ -37,16 +37,23 @@ let identifiers = {
     volume: 'mm'
 } 
 
-unitsMenu.addEventListener('change', (e) => {
-    unit = e.target.value;
+const options = document.querySelector('.options');
+dropDownMenu.addEventListener('click', () => {
+    options.classList.toggle('show');
+})
+
+options.addEventListener('click', (e) => {
+    unit = e.target.id;
+    options.classList.toggle('show');
 
     if (!unit) {
         unit = 'metric';
     }; 
 
     handleIdentifier();
-    fetchData(); 
-});
+    fetchData();
+})
+
 
 function handleIdentifier() {
     if (unit === 'metric') {
@@ -80,7 +87,7 @@ function handleUnit(type, value) {
 }
 
 function fetchData() {
-    fetch(`/.netlify/functions/fetchWeather?city=${encodeURIComponent(city)}`) 
+    fetch(`/.netlify/functions/fetchWeather?city=${encodeURIComponent(city)}`)  
     .then(response => response.json())
     .then(data => { 
  
@@ -176,8 +183,22 @@ function isNight() {
     return now >= 17 || now < 6;
 }
  
-document.documentElement.classList.toggle('dark', isNight()); 
+document.documentElement.classList.toggle('dark', isNight());   
+handleIcons(); 
  
+function handleIcons() { 
+    const arrowIcon = document.querySelector('#arrow-icon');
+    const settingsIcon = document.querySelector('#settings-icon');
+
+    arrowIcon.src = isNight() ? 
+                    './images/icons/arrow-down-dark.svg' :
+                    './images/icons/arrow-down.svg'; 
+
+    settingsIcon.src = isNight() ?
+                    './images/icons/settings.svg' :
+                    './images/icons/settings-light.svg';
+}
+
 function handleImage(conditionCode, isDay) { 
     if (conditionCode === 1000) {
         img = isDay ? '/images/clear.png' : '/images/night.png';  

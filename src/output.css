@@ -13,7 +13,6 @@
     --color-sky-100: oklch(95.1% 0.026 236.824);
     --color-sky-200: oklch(90.1% 0.058 230.902);
     --color-sky-400: oklch(74.6% 0.16 232.661);
-    --color-sky-500: oklch(68.5% 0.169 237.323);
     --color-sky-600: oklch(58.8% 0.158 241.966);
     --color-sky-700: oklch(50% 0.134 242.749);
     --color-sky-800: oklch(44.3% 0.11 240.79);
@@ -195,6 +194,15 @@
   }
 }
 @layer utilities {
+  .absolute {
+    position: absolute;
+  }
+  .relative {
+    position: relative;
+  }
+  .left-0 {
+    left: calc(var(--spacing) * 0);
+  }
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -261,6 +269,9 @@
   .table {
     display: table;
   }
+  .max-h-0 {
+    max-height: calc(var(--spacing) * 0);
+  }
   .w-5 {
     width: calc(var(--spacing) * 5);
   }
@@ -272,6 +283,9 @@
   }
   .w-\[4rem\] {
     width: 4rem;
+  }
+  .w-\[100\%\] {
+    width: 100%;
   }
   .w-\[calc\(50\%-0\.5rem\)\] {
     width: calc(50% - 0.5rem);
@@ -336,6 +350,9 @@
   .justify-self-end {
     justify-self: flex-end;
   }
+  .overflow-hidden {
+    overflow: hidden;
+  }
   .overflow-y-auto {
     overflow-y: auto;
   }
@@ -344,6 +361,10 @@
   }
   .rounded-xl {
     border-radius: var(--radius-xl);
+  }
+  .rounded-b-md {
+    border-bottom-right-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
   }
   .border {
     border-style: var(--tw-border-style);
@@ -363,6 +384,9 @@
   }
   .bg-sky-50 {
     background-color: var(--color-sky-50);
+  }
+  .bg-sky-200 {
+    background-color: var(--color-sky-200);
   }
   .bg-sky-800 {
     background-color: var(--color-sky-800);
@@ -462,6 +486,12 @@
   .text-gray-800 {
     color: var(--color-gray-800);
   }
+  .text-sky-100 {
+    color: var(--color-sky-100);
+  }
+  .text-sky-200 {
+    color: var(--color-sky-200);
+  }
   .text-sky-400 {
     color: var(--color-sky-400);
   }
@@ -498,6 +528,14 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .duration-700 {
+    --tw-duration: 700ms;
+    transition-duration: 700ms;
+  }
+  .duration-1000 {
+    --tw-duration: 1000ms;
+    transition-duration: 1000ms;
+  }
   .focus-within\:outline {
     &:focus-within {
       outline-style: var(--tw-outline-style);
@@ -507,6 +545,13 @@
   .focus-within\:outline-amber-400 {
     &:focus-within {
       outline-color: var(--color-amber-400);
+    }
+  }
+  .hover\:bg-gray-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-200);
+      }
     }
   }
   .hover\:bg-teal-950 {
@@ -615,6 +660,11 @@
       }
     }
   }
+  .dark\:bg-sky-800 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-sky-800);
+    }
+  }
   .dark\:bg-sky-950 {
     &:where(.dark, .dark *) {
       background-color: var(--color-sky-950);
@@ -645,6 +695,11 @@
       color: var(--color-sky-200);
     }
   }
+  .dark\:text-sky-800 {
+    &:where(.dark, .dark *) {
+      color: var(--color-sky-800);
+    }
+  }
   .dark\:hover\:bg-sky-200 {
     &:where(.dark, .dark *) {
       &:hover {
@@ -654,24 +709,18 @@
       }
     }
   }
-  .dark\:hover\:bg-sky-500 {
+  .dark\:hover\:bg-sky-900 {
     &:where(.dark, .dark *) {
       &:hover {
         @media (hover: hover) {
-          background-color: var(--color-sky-500);
+          background-color: var(--color-sky-900);
         }
       }
     }
   }
-  .dark\:hover\:bg-sky-800 {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: var(--color-sky-800);
-        }
-      }
-    }
-  }
+}
+.show {
+  max-height: 500px;
 }
 @property --tw-border-style {
   syntax: "*";
@@ -687,12 +736,17 @@
   inherits: false;
   initial-value: solid;
 }
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
       --tw-font-weight: initial;
       --tw-outline-style: solid;
+      --tw-duration: initial;
     }
   }
 }
