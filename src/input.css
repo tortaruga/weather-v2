@@ -1,12 +1,7 @@
 @import "tailwindcss";
 
-body {
-    /* background-color: white; */
-    /* color: black; */
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-body.dark {
-    background-color: #212121;
-    color: whitesmoke;
-}    
- 
+@theme {
+    --font-montserrat: 'Montserrat', sans;
+}
