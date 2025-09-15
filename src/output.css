@@ -7,12 +7,15 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-amber-300: oklch(87.9% 0.169 91.605);
     --color-amber-400: oklch(82.8% 0.189 84.429);
     --color-teal-950: oklch(27.7% 0.046 192.524);
     --color-sky-50: oklch(97.7% 0.013 236.62);
     --color-sky-100: oklch(95.1% 0.026 236.824);
     --color-sky-200: oklch(90.1% 0.058 230.902);
+    --color-sky-300: oklch(82.8% 0.111 230.318);
     --color-sky-400: oklch(74.6% 0.16 232.661);
+    --color-sky-500: oklch(68.5% 0.169 237.323);
     --color-sky-600: oklch(58.8% 0.158 241.966);
     --color-sky-700: oklch(50% 0.134 242.749);
     --color-sky-800: oklch(44.3% 0.11 240.79);
@@ -23,7 +26,6 @@
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-200: oklch(92.8% 0.006 264.531);
-    --color-gray-800: oklch(27.8% 0.033 256.848);
     --color-white: #fff;
     --spacing: 0.25rem;
     --container-xl: 36rem;
@@ -275,6 +277,9 @@
   .w-5 {
     width: calc(var(--spacing) * 5);
   }
+  .w-6 {
+    width: calc(var(--spacing) * 6);
+  }
   .w-7 {
     width: calc(var(--spacing) * 7);
   }
@@ -329,8 +334,8 @@
   .justify-between {
     justify-content: space-between;
   }
-  .justify-end {
-    justify-content: flex-end;
+  .justify-start {
+    justify-content: flex-start;
   }
   .justify-stretch {
     justify-content: stretch;
@@ -387,6 +392,21 @@
   }
   .bg-sky-200 {
     background-color: var(--color-sky-200);
+  }
+  .bg-sky-600 {
+    background-color: var(--color-sky-600);
+  }
+  .bg-sky-600\/10 {
+    background-color: color-mix(in srgb, oklch(58.8% 0.158 241.966) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-sky-600) 10%, transparent);
+    }
+  }
+  .bg-sky-600\/20 {
+    background-color: color-mix(in srgb, oklch(58.8% 0.158 241.966) 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-sky-600) 20%, transparent);
+    }
   }
   .bg-sky-800 {
     background-color: var(--color-sky-800);
@@ -480,20 +500,14 @@
   .text-blue-100 {
     color: var(--color-blue-100);
   }
-  .text-blue-950 {
-    color: var(--color-blue-950);
-  }
-  .text-gray-800 {
-    color: var(--color-gray-800);
-  }
   .text-sky-100 {
     color: var(--color-sky-100);
   }
-  .text-sky-200 {
-    color: var(--color-sky-200);
-  }
   .text-sky-400 {
     color: var(--color-sky-400);
+  }
+  .text-sky-500 {
+    color: var(--color-sky-500);
   }
   .text-sky-600 {
     color: var(--color-sky-600);
@@ -693,6 +707,11 @@
   .dark\:text-sky-200 {
     &:where(.dark, .dark *) {
       color: var(--color-sky-200);
+    }
+  }
+  .dark\:text-sky-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-sky-300);
     }
   }
   .dark\:text-sky-800 {

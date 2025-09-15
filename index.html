@@ -8,9 +8,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 </style>
     <link rel="stylesheet" href="./src/output.css">
-</head>   
-<body class="p-4 bg-sky-50 font-montserrat text-sky-700 dark:bg-sky-950 dark:text-sky-100"> 
-    <section class="settings flex justify-end">   
+</head>    
+<body class="p-4 transition duration-1000 bg-sky-50 font-montserrat text-sky-700 dark:bg-sky-950 dark:text-sky-100"> 
+    <section class="settings flex justify-between"> 
+        <button class="theme-toggle" aria-label="switch theme"> 
+          <svg id="theme-svg" class="w-6 cursor-pointer" aria-label="switch dark/light mode" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" fill="#052f4a"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z" fill="#052f4a"></path> </g><title>switch theme</title></svg>
+        </button>
+        
         <div class="units relative">
         <div class="units-dropdown text-center rounded-md flex gap-3 bg-blue-950 dark:bg-sky-100 text-white dark:text-blue-950 p-2 cursor-pointer">
             <img id="settings-icon" src="./images/icons/settings-light.svg" class="w-5" alt="settings icon">
@@ -28,7 +32,7 @@
     <h1 class="text-center text-6xl my-6 font-semibold">How's the weather today?</h1>
        
     <form class="weather-form max-w-xl mx-auto sm:flex-row flex flex-col gap-2 mt-15 mb-8"> 
-        <label for="city-input" class="sm:grow focus-within:outline focus-within:outline-amber-400 focus-visible:outline focus-visible:outline-amber-400 p-2.5 flex gap-4 items-center rounded-md bg-gray-200 text-gray-800">  
+        <label for="city-input" class="sm:grow focus-within:outline focus-within:outline-amber-400 focus-visible:outline focus-visible:outline-amber-400 font-semibold p-2.5 flex gap-4 items-center rounded-md bg-gray-200 text-sky-900">   
             <img class="w-5" src="./images/icons/search.svg" alt="magnifying glass">
             <input type="text" class="focus-visible:outline-none grow" placeholder="Search for a place..." name="city-input" id="city-input">
         </label>
@@ -36,8 +40,8 @@
     </form>  
 
     <section class="container max-w-7xl mx-auto  md:grid md:items-stretch grid-rows-1 gap-6 md:grid-cols-3">
-        <div class="col col-span-2 flex flex-col justify-stretch ">  
-          <section class="forecast bg-center bg-cover bg-no-repeat grow bg-sky-800/20 dark:bg-sky-200/20 text-center p-8 rounded-xl"> 
+        <div class="col col-span-2 flex flex-col justify-stretch "> 
+          <section class="forecast bg-center bg-cover bg-no-repeat grow bg-sky-600/10 dark:bg-sky-200/20 text-center p-8 rounded-xl"> 
              
             <div class="md:flex justify-between items-center mb-6 ">
             <div class="coordinates md:text-left ">
@@ -109,11 +113,11 @@
         </section>  
     </section>
 
-    <section class="hourly max-w-7xl mx-auto mt-8"> 
-        <h3 class="text-blue-950 capitalize font-bold">hourly forecast</h3>
+    <section class="hourly max-w-7xl mx-auto mt-8">  
+        <h3 class=" text-sky-500 dark:text-sky-300 capitalize text-2xl font-bold">hourly forecast</h3>
         <div class="container justify-around text-sky-900 bg-blue-950/10 dark:bg-sky-100/10 dark:text-sky-200 p-4 rounded-md flex overflow-y-auto gap-4 mb-8 mt-4 pb-4 text-center"></div>
     </section>
 
-    <script src="./app.js"></script>
+    <script type="module" src="./app.js"></script>
 </body>
 </html>
