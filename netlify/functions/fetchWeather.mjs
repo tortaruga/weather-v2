@@ -3,10 +3,11 @@ export async function handler(e) {
     const params = e.queryStringParameters;
     
     let query;
+
     if (params.city) {
       query = encodeURIComponent(params.city)
     } else if (params.lat && params.long) {
-      query = `${lat},${long}`;
+      query = `${params.lat},${params.long}`;
     } else {
       return {
         statusCode: 400,
