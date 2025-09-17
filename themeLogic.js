@@ -12,9 +12,7 @@ handleIcons();
 
 function handleThemeToggle() {
     isDark = !isDark;
-    DOMvars.themePaths.forEach(path => {
-        path.setAttribute('fill', isDark ? '#b8e6fe' : '#052f4a');
-    })
+   
     document.documentElement.classList.toggle('dark', isDark);  
     handleIcons(); 
 }
@@ -22,16 +20,17 @@ function handleThemeToggle() {
 DOMvars.themeToggle.addEventListener('click', handleThemeToggle);
 
 function handleIcons() { 
-    const arrowIcon = document.querySelector('#arrow-icon');
-    const settingsIcon = document.querySelector('#settings-icon');
+    const arrowIconPath = document.querySelector('#arrow-icon path');
+    const settingsIconPaths = document.querySelectorAll('#settings-icon path');
 
-    arrowIcon.src = isDark ?  
-                    './images/icons/arrow-down-dark.svg' :
-                    './images/icons/arrow-down.svg'; 
-
-    settingsIcon.src = isDark ?
-                    './images/icons/settings.svg' :
-                    './images/icons/settings-light.svg';
-}
+    arrowIconPath.setAttribute('fill', isDark ? '#1C274C' : '#b8e6fe');
+    settingsIconPaths.forEach(path => {
+        path.setAttribute('fill', isDark ? '#1C274C' : '#b8e6fe')
+    })
+    
+    DOMvars.themePaths.forEach(path => {
+        path.setAttribute('fill', isDark ? '#b8e6fe' : '#052f4a');
+    })
+}    
 
 

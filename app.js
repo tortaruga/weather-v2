@@ -7,6 +7,8 @@ let city = 'rome';
 
 
 fetchData(`/.netlify/functions/fetchWeather?city=${encodeURIComponent(city)}`)
+    
+
 
 DOMvars.weatherForm.addEventListener('submit', (e) => {
     e.preventDefault();
