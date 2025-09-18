@@ -5,14 +5,27 @@ import * as utils from './utils.js';
 function showMessage(msg) {
   const msgContainer = document.querySelector('.message');
   const messageP = document.querySelector('.msg');
+  const details = document.querySelector('.details');
+  const forecastContainer = document.querySelector('.forecast');
+
+  details.classList.add('hidden');
+  details.classList.remove('flex');
   msgContainer.classList.add('flex');
   msgContainer.classList.remove('hidden');
+  forecastContainer.classList.add('hidden'); 
+
   messageP.innerHTML = msg;
 }
 
 function hideMessage() {
   const msgContainer = document.querySelector('.message');
   const forecastContainer = document.querySelector('.forecast');
+  const details = document.querySelector('.details');
+
+  
+  details.classList.remove('hidden');
+  details.classList.add('flex');
+
   msgContainer.classList.remove('flex');
   msgContainer.classList.add('hidden');
 
@@ -53,6 +66,7 @@ function hideFallback() {
 export function fetchData(url) {
     showMessage("Loading data...");
     showFallback();
+    stopClock();
 
     fetch(url)  
     .then(response => {
@@ -85,6 +99,7 @@ function displayData(data) {
            
         DOMvars.dateElement.textContent = utils.getFormattedDate(data.location.localtime); 
         DOMvars.timeElement.textContent = utils.getFormattedTime(data.location.localtime);  
+        startClock(data.location.localtime, DOMvars.timeElement);
         // conditionElement.textContent = data.forecast.forecastday[0].day.condition.text; 
         DOMvars.conditionElement.textContent = data.current.condition.text; 
 
@@ -104,5 +119,38 @@ function displayData(data) {
         utils.displayMoonPhaseIcon(data.forecast.forecastday[0].astro.moon_phase);
         DOMvars.illuminationElement.textContent = data.forecast.forecastday[0].astro.moon_illumination + '%';  
 
-        utils.createDailyHourElements(data.forecast.forecastday[0].hour)
+        utils.createDailyHourElements(data.forecast.forecastday[0].hour, data.location.localtime)
+}
+
+let clockInterval;
+
+function startClock(initialTime, timeElement) {
+  const startTimestamp = new Date(initialTime).getTime();
+
+  function updateClock() {
+    const now = Date.now();
+    const elapsed = now - startTimestamp;
+    const currentTime = new Date(startTimestamp + elapsed);
+
+    const hours = currentTime.getHours().toString().padStart(2, '0');
+    const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+
+    timeElement.textContent = `${hours}:${minutes}`;
+  }
+
+  const msToNextMinute = 60000 - (new Date().getSeconds() * 1000 + new Date().getMilliseconds());
+
+  setTimeout(() => {
+    updateClock();
+    clockInterval = setInterval(updateClock, 60000);
+  }, msToNextMinute);
+
+  updateClock();
+}
+
+function stopClock() {
+  if (clockInterval) {
+    clearInterval(clockInterval);
+    clockInterval = null;
+  }
 }

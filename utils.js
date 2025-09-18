@@ -90,9 +90,11 @@ export function handleImage(conditionCode, isDay) {
 }
 
 
-export function createDailyHourElements(data) {
+export function createDailyHourElements(hours, localTime) {
     DOMvars.hourlyForecastContainer.innerHTML = '';
-    const hourNow = new Date().getHours();
+    const hourNow = new Date(localTime).getHours();
+    console.log(hourNow)
+    
     if ((24 - hourNow) < 8) {
         DOMvars.hourlyForecastContainer.classList.add('justify-start');
         DOMvars.hourlyForecastContainer.classList.remove('justify-around');
@@ -107,14 +109,14 @@ export function createDailyHourElements(data) {
         DOMvars.hourlyForecastContainer.appendChild(div);
 
         const hour = document.createElement('p');
-        hour.textContent = getFormattedTime(data[i].time);
+        hour.textContent = getFormattedTime(hours[i].time);
         div.appendChild(hour); 
         const icon = document.createElement('img');
         icon.classList.add("w-[2rem]", "d-block", "m-auto");       
-        icon.src = data[i].condition.icon; 
+        icon.src = hours[i].condition.icon; 
         div.appendChild(icon);  
         const temp = document.createElement('p');
-        temp.textContent =  units.handleUnit('temp', data[i][`temp_${units.identifiers.temp}`]);   
+        temp.textContent =  units.handleUnit('temp', hours[i][`temp_${units.identifiers.temp}`]);   
         div.appendChild(temp);
     }
 
